@@ -8,13 +8,13 @@ export function Timer() {
   const canvasRef = React.useRef(null);
 
   const [time, setTime] = React.useState(2);
-  const [isRunning, setIsRunning] = React.useState(true);
-  const [displayTime, setDisplayTime] = React.useState(5);
-  const [totalTime, setTotalTime] = React.useState(5);
+  const [isRunning, setIsRunning] = React.useState(false);
+  const [displayTime, setDisplayTime] = React.useState(15);
+  const [totalTime, setTotalTime] = React.useState(15);
 
-  const [pomodoro, setPomodoro] = React.useState(25);
-  const [shortBreak, setShortBreak] = React.useState(5);
-  const [longBreak, setLongBreak] = React.useState(15);
+  const [pomodoro, setPomodoro] = React.useState(25 * 60);
+  const [shortBreak, setShortBreak] = React.useState(5 * 60);
+  const [longBreak, setLongBreak] = React.useState(15 * 60);
 
   const [target, setTarget] = React.useState(0);
 
@@ -29,7 +29,7 @@ export function Timer() {
     let t = time;
 
 
-    console.log("start", t);
+
 
     const render = (t) => {
       ctx.beginPath();
@@ -80,7 +80,7 @@ export function Timer() {
 
     const interval = setInterval(() => {
       if (isRunning) {
-        if (displayTime === 0) {
+        if (displayTime == 0) {
 
           setTotalTime(targetTime[target]);
           setDisplayTime(targetTime[target]);
@@ -110,7 +110,7 @@ export function Timer() {
         <span>pomodoro</span><span>short break</span><span>long break</span>
       </div>
     </section>
-    <section>
+    <section className="timer">
       <h1>
         {
           timeToString(displayTime)
