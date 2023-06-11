@@ -125,6 +125,7 @@ export function Timer() {
 
     return () => {
       clearInterval(interval);
+
     }
   }
   ), [isRunning, target]
