@@ -28,6 +28,9 @@ export function Timer() {
     const ctx = canvasRef.current?.getContext("2d");
     let t = time;
 
+
+    console.log("start", t);
+
     const render = (t) => {
       ctx.beginPath();
       ctx.lineCap = 'round';
@@ -64,7 +67,7 @@ export function Timer() {
 
     return () => {
 
-      setTime(t)
+      setTime(t == 0 ? 2 : t)
       clearInterval(interval);
 
 
@@ -78,10 +81,10 @@ export function Timer() {
     const interval = setInterval(() => {
       if (isRunning) {
         if (displayTime === 0) {
-          setTarget((target + 1) % 3);
+
           setTotalTime(targetTime[target]);
           setDisplayTime(targetTime[target]);
-
+          setTarget((target + 1) % 3);
           clearInterval(interval);
         } else {
           setDisplayTime(displayTime - 1);
