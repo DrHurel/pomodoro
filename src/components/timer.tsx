@@ -21,11 +21,12 @@ export function Timer() {
   const targetTime = [pomodoro, shortBreak, longBreak];
 
 
-
-
   React.useEffect(() => {
 
     const ctx = canvasRef.current?.getContext("2d");
+    const color = (document.styleSheets[0].cssRules[0] as any).style.getPropertyValue("--primary")
+
+
     let t = time;
 
 
@@ -35,6 +36,35 @@ export function Timer() {
       ctx.beginPath();
       ctx.lineCap = 'round';
       ctx.lineWidth = 15;
+      ctx.strokeStyle = color;
+
+      ctx.ellipse(205, 205, 366 / 2, 366 / 2, -85 * Math.PI / 180, 0, t * Math.PI);
+
+
+      ctx.stroke();
+    }
+
+    render(t);
+
+  }, [])
+
+
+  React.useEffect(() => {
+
+    const ctx = canvasRef.current?.getContext("2d");
+    const color = (document.styleSheets[0].cssRules[0] as any).style.getPropertyValue("--primary")
+
+
+    let t = time;
+
+
+
+
+    const render = (t) => {
+      ctx.beginPath();
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 15;
+      ctx.strokeStyle = color;
 
       ctx.ellipse(205, 205, 366 / 2, 366 / 2, -85 * Math.PI / 180, 0, t * Math.PI);
 
@@ -104,12 +134,20 @@ export function Timer() {
 
 
   return <main>
-    <section>
+    <header>
       <img src={logo} alt="logo" />
       <div>
-        <span>pomodoro</span><span>short break</span><span>long break</span>
+        <span
+          className={target == 1 ? "active" : ""}
+        >pomodoro</span>
+        <span
+          className={target == 2 ? "active" : ""}
+        >short break</span>
+        <span
+          className={target == 0 ? "active" : ""}
+        >long break</span>
       </div>
-    </section>
+    </header>
     <section className="timer">
       <h1>
         {
