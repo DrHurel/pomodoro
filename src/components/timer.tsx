@@ -1,24 +1,30 @@
 import React from "react";
+
 import logo from "../assets/logo.svg";
+import settings from "../assets/icon-settings.svg";
+
 import timeToString from "../lib/timeToString";
+import { OptionMenu } from "./optionMenu";
+
 
 export function Timer() {
 
 
   const canvasRef = React.useRef(null);
 
-  const [time, setTime] = React.useState(2);
-  const [isRunning, setIsRunning] = React.useState(false);
-  const [displayTime, setDisplayTime] = React.useState(15);
-  const [totalTime, setTotalTime] = React.useState(15);
+  const [time, setTime] = React.useState(2); // 2 is the initial value because the canvas is drawn with 2 * Math.PI
+  const [isRunning, setIsRunning] = React.useState(false); // isRunning is used to start and stop the timer
+  const [displayTime, setDisplayTime] = React.useState(15); // displayTime is the time that is displayed on the screen
+  const [totalTime, setTotalTime] = React.useState(15); // totalTime is the time that is used to calculate the time that is displayed on the screen
 
-  const [pomodoro, setPomodoro] = React.useState(25 * 60);
-  const [shortBreak, setShortBreak] = React.useState(5 * 60);
-  const [longBreak, setLongBreak] = React.useState(15 * 60);
+  const [pomodoro, setPomodoro] = React.useState(25 * 60); // pomodoro is the time that is used for the pomodoro cycle
+  const [shortBreak, setShortBreak] = React.useState(5 * 60); // shortBreak is the time that is used for the short break cycle
+  const [longBreak, setLongBreak] = React.useState(15 * 60); // longBreak is the time that is used for the long break cycle
 
-  const [target, setTarget] = React.useState(0);
+  const [cycle, setCycle] = React.useState(0); // cycle is used to keep track of the current cycle
+  const [target, setTarget] = React.useState(-1); // target is used to keep track of the current target time (start with -1 because before the first start there is 15s of nothing)
 
-  const targetTime = [pomodoro, shortBreak, longBreak];
+  const targetTime = [pomodoro, shortBreak, longBreak]; // targetTime is an array that contains the target times for the pomodoro, short break and long break cycles
 
 
   React.useEffect(() => {
@@ -57,6 +63,7 @@ export function Timer() {
 
     let t = time;
 
+    console.log("rendering", t)
 
 
 
@@ -88,7 +95,10 @@ export function Timer() {
         }
         ctx?.clearRect(0, 0, 410, 410);
         render(t);
+      } else {
+        clearInterval(interval)
       }
+
     }, 10);
 
 
@@ -112,13 +122,34 @@ export function Timer() {
       if (isRunning) {
         if (displayTime == 0) {
 
-          setTotalTime(targetTime[target]);
-          setDisplayTime(targetTime[target]);
-          setTarget((target + 1) % 3);
+          if (cycle == 8) {
+            setTotalTime(targetTime[0]);
+            setDisplayTime(targetTime[0]);
+            setCycle(1);
+            setTarget(0);
+            return;
+          }
+
+
+          if (cycle == 7) {
+            setTotalTime(targetTime[2]);
+            setDisplayTime(targetTime[2]);
+            setCycle(cycle + 1);
+            setTarget(2);
+          } else {
+            setTotalTime(targetTime[(target + 1) % 2]);
+            setDisplayTime(targetTime[(target + 1) % 2]);
+            setCycle(cycle + 1);
+            setTarget((target + 1) % 2);
+          }
+
           clearInterval(interval);
+
         } else {
           setDisplayTime(displayTime - 1);
         }
+      } else {
+        clearInterval(interval)
       }
     }, 1000);
 
@@ -135,17 +166,18 @@ export function Timer() {
 
 
   return <main>
+    <OptionMenu setPomodoro={setPomodoro} setLongBreak={setLongBreak} setShortBreak={setShortBreak} />
     <header>
       <img src={logo} alt="logo" />
       <div>
         <span
-          className={target == 1 ? "active" : ""}
+          className={target == 0 ? "active" : ""}
         >pomodoro</span>
         <span
-          className={target == 2 ? "active" : ""}
+          className={target == 1 ? "active" : ""}
         >short break</span>
         <span
-          className={target == 0 ? "active" : ""}
+          className={target == 2 ? "active" : ""}
         >long break</span>
       </div>
     </header>
@@ -166,6 +198,12 @@ export function Timer() {
         }</button>
 
     </section>
+
+    <button className="option" onClick={() => {
+      document.querySelector("form")?.classList.toggle("display");
+    }}>
+      <img src={settings} alt="" />
+    </button>
   </main>
 
 
