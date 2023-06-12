@@ -1,5 +1,6 @@
 import React from 'react';
 import iconClose from '../assets/icon-close.svg';
+import iconCheckMark from '../assets/icon-check-mark.svg';
 
 export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
 
@@ -45,15 +46,22 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
     </section>
     <section className="setting-font">
       <h3>FONT</h3>
-      <div>
-        <input type="button" value="Aa" /><input type="button" value="Aa" /><input type="button" value="Aa" />
-      </div>
+      <fieldset>
+
+        <input type="radio" value={1} name="font" />
+        <input type="radio" value={2} name="font" />
+        <input type="radio" value={3} name="font" />
+      </fieldset>
     </section>
     <div className="setting-color">
       <h3>COLOR</h3>
-      <div>
-        <input type="button" value="Aa" /><input type="button" value="Aa" /><input type="button" value="Aa" />
-      </div>
+      <fieldset>
+
+        <input type="radio" name="color" value={1} />
+        <input type="radio" name="color" value={2} />
+        <input type="radio" name="color" value={3} />
+
+      </fieldset>
 
     </div>
 
@@ -62,4 +70,6 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
 
   </form>
 
-}
+}/*<label htmlFor="color">
+          <img src={iconCheckMark} alt="" />
+        </label>*/
