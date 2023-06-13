@@ -169,9 +169,35 @@ form {
 
 
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   display: none;
+
+  input[type="submit"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    border: none;
+    color: white;
+
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(226, 125, 125)
+    }
+
+
+    &:focus {
+      outline: none;
+    }
+
+    border-radius: 25px;
+    padding: 1rem;
+    width: 140px;
+    height: 50px;
+    transform: translateY(25px);
+  }
 }
 
 .setting-title {

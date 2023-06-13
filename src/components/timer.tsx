@@ -12,6 +12,9 @@ export function Timer() {
 
   const canvasRef = React.useRef(null);
 
+  const startSound = require("../assets/debut_travail.mp3");
+  const endSound = require("../assets/fin_travail.mp3");
+
   const [time, setTime] = React.useState(2); // 2 is the initial value because the canvas is drawn with 2 * Math.PI
   const [isRunning, setIsRunning] = React.useState(false); // isRunning is used to start and stop the timer
   const [displayTime, setDisplayTime] = React.useState(15); // displayTime is the time that is displayed on the screen
@@ -26,6 +29,7 @@ export function Timer() {
 
   const targetTime = [pomodoro, shortBreak, longBreak]; // targetTime is an array that contains the target times for the pomodoro, short break and long break cycles
 
+  const [audio, setAudio] = React.useState(true); // audio is used to play the start and end sounds
 
   React.useEffect(() => {
 
@@ -63,11 +67,9 @@ export function Timer() {
 
     let t = time;
 
-    console.log("rendering", t)
-
-
 
     const render = (t) => {
+
       ctx.beginPath();
       ctx.lineCap = 'round';
       ctx.lineWidth = 15;
@@ -88,10 +90,11 @@ export function Timer() {
 
       if (isRunning) {
 
+
         t = t - (2 / (totalTime * 100));
         if (t < 0) {
           t = 0;
-          clearInterval(interval)
+          return;
         }
         ctx?.clearRect(0, 0, 410, 410);
         render(t);
@@ -118,8 +121,21 @@ export function Timer() {
 
   React.useEffect(() => {
 
+
+
+
     const interval = setInterval(() => {
       if (isRunning) {
+        if (displayTime == 5 && (target == 1 || target == -1) && audio) {
+          new Audio(startSound).play();
+        }
+
+        if (displayTime == 0 && target == 0 && audio) {
+          new Audio(endSound).play();
+        }
+
+
+
         if (displayTime == 0) {
 
           if (cycle == 8) {
