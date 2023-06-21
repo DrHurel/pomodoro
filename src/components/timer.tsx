@@ -29,7 +29,27 @@ export function Timer() {
 
   const targetTime = [pomodoro, shortBreak, longBreak]; // targetTime is an array that contains the target times for the pomodoro, short break and long break cycles
 
-  const [audio, setAudio] = React.useState(true); // audio is used to play the start and end sounds
+  const [audio, setAudio] = React.useState(true); // create in the future a way toggle the audio on and off
+
+  const reset = () => {
+    setCycle(0);
+    setTarget(-1);
+    setTime(2);
+    setDisplayTime(15);
+    setIsRunning(false);
+    setTotalTime(15);
+
+  }
+
+
+
+
+
+
+
+
+
+
 
   React.useEffect(() => {
 
@@ -182,7 +202,7 @@ export function Timer() {
 
 
   return <main>
-    <OptionMenu setPomodoro={setPomodoro} setLongBreak={setLongBreak} setShortBreak={setShortBreak} />
+    <OptionMenu setPomodoro={setPomodoro} setLongBreak={setLongBreak} setShortBreak={setShortBreak} reset={reset} />
     <header>
       <img src={logo} alt="logo" />
       <div>

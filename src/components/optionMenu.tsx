@@ -1,8 +1,7 @@
 import React from 'react';
 import iconClose from '../assets/icon-close.svg';
-import iconCheckMark from '../assets/icon-check-mark.svg';
 
-export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
+export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) {
 
   const submitHandler = (e) => {
 
@@ -14,6 +13,8 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
     setPomodoro(pomodoro);
     setShortBreak(short);
     setLongBreak(long);
+
+    reset();
 
   }
 
@@ -70,6 +71,4 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak }) {
 
   </form>
 
-}/*<label htmlFor="color">
-          <img src={iconCheckMark} alt="" />
-        </label>*/
+}
