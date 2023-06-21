@@ -2,8 +2,8 @@ import { Theme } from "./theme";
 
 export const themes = [
 
-  new Theme('red', 'sans-serif'),
-  new Theme('blue', 'cursive'),
-  new Theme('green', 'monospace'),
+  new Theme('#F87070', 'Kumbh Sans'),
+  new Theme('#70F3F8', 'Roboto Slab'),
+  new Theme('#D881F8', 'Space Mono'),
 
 ]

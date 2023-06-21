@@ -57,11 +57,11 @@ export function Timer() {
 
     const ctx = canvasRef.current?.getContext("2d");
 
-
+    const root = document.querySelector(":root");
 
     themes.forEach(theme => {
       theme.sColor(setColor)
-
+      theme.sRoot(root as HTMLElement)
 
     });
 

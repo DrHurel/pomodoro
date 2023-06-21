@@ -22,15 +22,6 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
     setShortBreak(short);
     setLongBreak(long);
 
-    console.log(e.target.pomodoro.value)
-    console.log(e.target.short.value)
-    console.log(e.target.long.value)
-
-    console.log(e.target.font.value)
-    console.log(e.target.color.value)
-
-
-
 
     reset();
   }
@@ -56,25 +47,35 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
         TIME (MINUTES)
       </h3>
       <div>
-        <span><label htmlFor="pomodoro">pomodoro</label>
-          <input type="number" name="pomodoro" required defaultValue={25} /></span>
-        <span><label htmlFor="short">short break</label>
-          <input type="number" name="short" required defaultValue={5} /></span>
-        <span><label htmlFor="long">long break</label>
-          <input type="number" name="long" required defaultValue={15} /></span>
+        <span>
+          <label htmlFor="pomodoro">pomodoro</label>
+          <input type="number" name="pomodoro" required defaultValue={25} />
+        </span>
+        <span>
+          <label htmlFor="short">short break</label>
+          <input type="number" name="short" required defaultValue={5} />
+        </span>
+        <span>
+          <label htmlFor="long">long break</label>
+          <input type="number" name="long" required defaultValue={15} />
+        </span>
       </div>
     </section>
     <section className="setting-font">
       <h3>FONT</h3>
-      <fieldset >
+
+      <fieldset>
 
         <input type="radio" value={0} name="font" defaultChecked />
         <input type="radio" value={1} name="font" />
         <input type="radio" value={2} name="font" />
+
       </fieldset>
+
     </section>
     <div className="setting-color">
       <h3>COLOR</h3>
+
       <fieldset>
 
         <input type="radio" name="color" value={0} defaultChecked />
