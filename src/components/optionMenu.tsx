@@ -1,7 +1,11 @@
 import React from 'react';
 import iconClose from '../assets/icon-close.svg';
+import { themes } from '../lib/_themes';
 
 export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) {
+
+
+
 
   const submitHandler = (e) => {
 
@@ -10,12 +14,25 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
     const short = e.target.short.value * 60;
     const long = e.target.long.value * 60;
 
+    themes[e.target.color.value].applyColor();
+    themes[e.target.font.value].applyFont();
+
+
     setPomodoro(pomodoro);
     setShortBreak(short);
     setLongBreak(long);
 
-    reset();
+    console.log(e.target.pomodoro.value)
+    console.log(e.target.short.value)
+    console.log(e.target.long.value)
 
+    console.log(e.target.font.value)
+    console.log(e.target.color.value)
+
+
+
+
+    reset();
   }
 
 
@@ -26,8 +43,10 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
       <h2>
         Settings
       </h2>
-      <button onClick={() => {
+      <button onClick={(e) => {
+        e.preventDefault();
         document.querySelector("form")?.classList.toggle("display");
+
       }}>
         <img src={iconClose} alt="" />
       </button>
@@ -47,20 +66,20 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
     </section>
     <section className="setting-font">
       <h3>FONT</h3>
-      <fieldset>
+      <fieldset >
 
+        <input type="radio" value={0} name="font" defaultChecked />
         <input type="radio" value={1} name="font" />
         <input type="radio" value={2} name="font" />
-        <input type="radio" value={3} name="font" />
       </fieldset>
     </section>
     <div className="setting-color">
       <h3>COLOR</h3>
       <fieldset>
 
+        <input type="radio" name="color" value={0} defaultChecked />
         <input type="radio" name="color" value={1} />
         <input type="radio" name="color" value={2} />
-        <input type="radio" name="color" value={3} />
 
       </fieldset>
 

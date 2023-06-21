@@ -2,7 +2,8 @@ export class Theme {
 
   private color: string;
   private font: string;
-  private root;
+
+  private setColor;
 
   constructor(color, font) {
 
@@ -13,15 +14,21 @@ export class Theme {
   }
 
 
-  public setRoot(root): void {
-    this.root = root;
+  public sColor(value) {
+    this.setColor = value;
   }
 
-  public applyTheme(): void {
-    this.root.style.setProperty('--primary', this.color);
-    this.root.style.setProperty('--font', this.font);
 
+
+
+
+
+  public applyColor(): void {
+    this.setColor(this.color);
   }
 
+  public applyFont(): void {
+    return;
+  }
 
 }

@@ -5,6 +5,7 @@ import settings from "../assets/icon-settings.svg";
 
 import timeToString from "../lib/timeToString";
 import { OptionMenu } from "./optionMenu";
+import { themes } from "../lib/_themes";
 
 
 export function Timer() {
@@ -43,6 +44,7 @@ export function Timer() {
 
 
 
+  const [color, setColor] = React.useState("#F87070");
 
 
 
@@ -54,7 +56,14 @@ export function Timer() {
   React.useEffect(() => {
 
     const ctx = canvasRef.current?.getContext("2d");
-    const color = (document.styleSheets[0].cssRules[0] as any).style.getPropertyValue("--primary")
+
+
+
+    themes.forEach(theme => {
+      theme.sColor(setColor)
+
+
+    });
 
 
     let t = time;
@@ -82,7 +91,6 @@ export function Timer() {
   React.useEffect(() => {
 
     const ctx = canvasRef.current?.getContext("2d");
-    const color = (document.styleSheets[0].cssRules[0] as any).style.getPropertyValue("--primary")
 
 
     let t = time;
