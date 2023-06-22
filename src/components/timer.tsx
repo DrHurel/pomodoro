@@ -246,7 +246,7 @@ export function Timer() {
     <button className="option" onClick={() => {
       document.querySelector("form")?.classList.toggle("display");
     }}>
-      <img src={settings} alt="" />
+      <img src={settings} alt="settings" />
     </button>
   </main>
 
