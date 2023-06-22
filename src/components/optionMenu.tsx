@@ -39,7 +39,7 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
         document.querySelector("form")?.classList.toggle("display");
 
       }}>
-        <img src={iconClose} alt="" />
+        <img src={iconClose} alt="close" />
       </button>
     </section>
     <section className="setting-time">
@@ -49,15 +49,15 @@ export function OptionMenu({ setPomodoro, setShortBreak, setLongBreak, reset }) 
       <div>
         <span>
           <label htmlFor="pomodoro">pomodoro</label>
-          <input type="number" name="pomodoro" required defaultValue={25} />
+          <input type="number" name="pomodoro" id="pomodoro" required defaultValue={25} />
         </span>
         <span>
           <label htmlFor="short">short break</label>
-          <input type="number" name="short" required defaultValue={5} />
+          <input type="number" id="short" name="short" required defaultValue={5} />
         </span>
         <span>
           <label htmlFor="long">long break</label>
-          <input type="number" name="long" required defaultValue={15} />
+          <input type="number" id="long" name="long" required defaultValue={15} />
         </span>
       </div>
     </section>
